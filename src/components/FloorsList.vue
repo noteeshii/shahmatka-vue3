@@ -1,5 +1,6 @@
 <template>
-  <single-floor v-for="floor in floors" :key="floor.floor" :floor="floor" />
+  <single-floor v-for="floor in floors" :key="floor.floor" :floor="floor">
+  </single-floor>
 </template>
 
 <script>

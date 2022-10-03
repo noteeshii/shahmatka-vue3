@@ -2,24 +2,34 @@
   <div class="Floor">
     <span class="Floor__Number">{{ floor.floor }}</span>
     <div class="Floor__Flats-List">
-      <flats-list :flats="floor.flats" />
+      <slot />
     </div>
   </div>
 </template>
 
 <script>
-import FlatsList from "./FlatsList.vue";
-
 export default {
   name: "SingleFloor",
-  components: {
-    FlatsList,
-  },
   props: {
     floor: {
       type: Object,
       required: true,
     },
+  },
+  emits: ["startHover", "stopHover"],
+  setup(props, { emit }) {
+    const startHover = (idx) => {
+      emit("startHover", idx);
+    };
+
+    const stopHover = () => {
+      emit("stopHover");
+    };
+
+    return {
+      startHover,
+      stopHover,
+    };
   },
 };
 </script>
@@ -28,11 +38,11 @@ export default {
 .Floor {
   display: flex;
   column-gap: 5px;
-  padding: 2px;
+  /*padding: 2px;*/
   align-items: center;
 }
 .Floor:hover {
-  background: gainsboro;
+  background: lightblue;
 }
 
 .Floor:hover > .Floor__Number {
@@ -46,6 +56,6 @@ export default {
 }
 .Floor__Flats-List {
   display: flex;
-  column-gap: 5px;
+  /*column-gap: 5px;*/
 }
 </style>

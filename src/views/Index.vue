@@ -8,6 +8,8 @@
       :plan-types="planTypes"
       :statuses-list="statusesList"
       @sort="fetchSorted"
+      @selectHouse="selectHouse"
+      @cleanSelectedHouses="cleanSelectedHouses"
     />
     <div v-if="!isLoading" class="Houses-List">
       <houses-list :houses="sortedHouses" />
@@ -71,6 +73,18 @@ export default {
       isLoading.value = false;
     };
 
+    const selectHouse = (item) => {
+      housesList.value.forEach((house) => {
+        if (house.id === item.id) house.selected = true;
+      });
+    };
+
+    const cleanSelectedHouses = () => {
+      housesList.value.forEach((house) => {
+        house.selected = false;
+      });
+    };
+
     return {
       isLoading,
       housesList,
@@ -79,6 +93,8 @@ export default {
       planTypes,
       statusesList,
       fetchSorted,
+      selectHouse,
+      cleanSelectedHouses,
     };
   },
 };

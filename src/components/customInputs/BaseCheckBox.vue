@@ -4,7 +4,6 @@
     <input
       class="BaseCheckBox__field"
       type="checkbox"
-      value="true"
       v-model="modelValue"
       @change="inputHandle"
     />

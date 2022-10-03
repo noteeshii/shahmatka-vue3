@@ -99,6 +99,6 @@ export default {
 }
 
 .Flat:hover {
-  background: gray;
+  /*background: gray;*/
 }
 </style>

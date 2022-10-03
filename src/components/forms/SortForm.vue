@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import MultiSelect from "../customInputs/MultiSelect.vue";
 import CostRangeForm from "./CostRangeForm.vue";
 import BaseSelect from "../customInputs/BaseSelect.vue";
@@ -87,33 +87,30 @@ export default {
   },
   emits: {
     sort: (attributes) => true,
+    selectHouse: (item) => true,
+    cleanSelectedHouses: () => true,
   },
   setup(props, { emit }) {
-    const selectedHouses = ref([]);
     const costRangeFrom = ref("0");
     const costRangeTo = ref("0");
     const selectedPlan = ref();
     const selectedStatus = ref();
     const square = ref();
-    const subsidy = ref();
-    const marginal = ref();
-    const renovation = ref();
-    const installment = ref();
+    const subsidy = ref(false);
+    const marginal = ref(false);
+    const renovation = ref(false);
+    const installment = ref(false);
+
+    const selectedHouses = computed(() => {
+      return props.housesList.filter((house) => house.selected);
+    });
 
     const selectItem = (item) => {
-      selectedHouses.value.push(item);
-      props.housesList.map((house) => {
-        if (house.id === item.id) house.selected = true;
-        return house;
-      });
+      emit("selectHouse", item);
     };
 
     const cleanSelectedHouses = () => {
-      selectedHouses.value = [];
-      props.housesList.map((house) => {
-        house.selected = false;
-        return house;
-      });
+      emit("cleanSelectedHouses");
     };
 
     const sortHandle = () => {
@@ -124,10 +121,10 @@ export default {
         selectedPlan: selectedPlan.value,
         selectedHouses: selectedHouses.value,
         selectedStatus: selectedStatus.value,
-        subsidy: !!subsidy.value || false,
-        marginal: !!marginal.value || false,
-        renovation: !!renovation.value || false,
-        installment: !!installment.value || false,
+        subsidy: !!subsidy.value,
+        marginal: !!marginal.value,
+        renovation: !!renovation.value,
+        installment: !!installment.value,
       };
       emit("sort", attributes);
     };

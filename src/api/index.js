@@ -22,11 +22,11 @@ export async function fetchHomes(cb) {
 }
 
 export async function fetchPlanTypes(cb) {
-  cb(await formatPlanTypes(prevDefault.flats));
+  cb(formatPlanTypes(prevDefault.flats));
 }
 
 export async function fetchStatuses(cb) {
-  cb(await formatStatuses(prevDefault.flats));
+  cb(formatStatuses(prevDefault.flats));
 }
 
 function formatStatuses(data) {
@@ -128,6 +128,6 @@ function checkCostRange(cost, from = 0, to) {
 }
 
 function equal(a, b) {
-  if (!b || b === 0 || b === undefined) return true;
-  return a === b;
+  // if (!b || b === 0 || b === undefined) return true;
+  return !b || a === b;
 }

@@ -1,13 +1,13 @@
 {
   "index.html": {
-    "file": "assets/index.d30ec87c.js",
+    "file": "assets/index.ca16dc0e.js",
     "src": "index.html",
     "isEntry": true,
     "dynamicImports": [
       "src/api/data.json"
     ],
     "css": [
-      "assets/index.7cdd7f0e.css"
+      "assets/index.5d6aebde.css"
     ]
   },
   "src/api/data.json": {
@@ -16,7 +16,7 @@
     "isDynamicEntry": true
   },
   "index.css": {
-    "file": "assets/index.7cdd7f0e.css",
+    "file": "assets/index.5d6aebde.css",
     "src": "index.css"
   }
 }
